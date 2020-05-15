@@ -15,11 +15,12 @@ export default class SwapiService {
 
     async getAllPeople () {
         const res = await this.getResource(`/people/`);
-        return res.results
+        return res.results.map(this._transformPerson);
     }
 
-    getPerson (id) {
-        return this.getResource(`/people/${id}`);
+    async getPerson (id) {
+        const person = await this.getResource(`/people/${id}`);
+        return this._transformPerson(person);
     }
 
     async getAllPlanets () {
@@ -36,11 +37,12 @@ export default class SwapiService {
 
     async getAllStarships () {
         const res = await this.getResource(`/starships/`);
-        return res.results
+        return res.results.map(this._transformStarship);
     }
 
-    getStarship (id) {
-        return this.getResource(`/starships/${id}`);
+    async getStarship(id) {
+        const starship = await this.getResource(`/starships/${id}`);
+        return this._transformStarship(starship);
     }
 
     _extractId (item) {
@@ -62,19 +64,23 @@ export default class SwapiService {
         return {
             id: this._extractId(person),
             name: person.name,
-            population: person.population,
-            rotationPeriod: person.rotation_period,
-            diameter: person.diameter
+            gender: person.gender,
+            birthYear: person.birthYear,
+            eyeColor: person.eyeColor
         }
     }
 
-    _transformStarship (planet) {
+    _transformStarship (starship) {
         return {
-            id: this._extractId(planet),
-            name: planet.name,
-            population: planet.population,
-            rotationPeriod: planet.rotation_period,
-            diameter: planet.diameter
+            id: this._extractId(starship),
+            name: starship.name,
+            model: starship.model,
+            manufacturer: starship.manufacturer,
+            costInCredits: starship.costInCredits,
+            length: starship.length,
+            crew: starship.crew,
+            passengers: starship.passengers,
+            cargoCapacity: starship.cargoCapacity
         }
     }
 
