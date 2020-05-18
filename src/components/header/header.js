@@ -4,21 +4,21 @@ import './header.css';
 
 const Header = () => {
   return (
-    <div className="header container d-flex">
+    <div className="header d-flex">
       <h3>
-        <span>
-          Star DB
-        </span>
+        <a href="#/">
+          StarDB
+        </a>
       </h3>
       <ul className="d-flex">
         <li>
-          <span>People</span>
+          <a href="#/people">People</a>
         </li>
         <li>
-          <span>Planets</span>
+          <a href="#/planets">Planets</a>
         </li>
         <li>
-          <span>Starships</span>
+          <a href="#/starships">Starships</a>
         </li>
       </ul>
     </div>
